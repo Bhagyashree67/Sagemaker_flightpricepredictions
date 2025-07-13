@@ -259,10 +259,17 @@ preprocessor = Pipeline(steps=[
 ])
 
 # read the training data
-path=r"C:\Users\Bhagyashree\OneDrive\Desktop\Flights_predictions\Data\train.csv"
+import os
+
+# Build the correct relative path to the train.csv file
+path = os.path.join(os.path.dirname(__file__), "../Data/train.csv")
+
+# Read the training data
 train = pd.read_csv(path)
+
+# Separate features and target
 X_train = train.drop(columns="price")
-y_train = train.price.copy()
+y_train = train["price"].copy()
 
 # fit and save the preprocessor
 preprocessor.fit(X_train, y_train)
